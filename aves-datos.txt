@@ -1,0 +1,17 @@
+{
+    "Cóndor": {
+        "descripcion": "El cóndor es un ave carroñera de gran tamaño.",
+        "origen": "Andes de América del Sur.",
+        "datos": "Es considerado un símbolo nacional en varios países."
+    },
+    "Huala": {
+        "descripcion": "La huala es un ave acuática típica de lagos y lagunas.",
+        "origen": "Chile y Argentina.",
+        "datos": "Es conocida por su canto nocturno característico."
+    },
+    "Tórtola": {
+        "descripcion": "La tórtola es un ave terrestre de tamaño mediano.",
+        "origen": "Diversos continentes, incluyendo América del Sur.",
+        "datos": "Se asocia frecuentemente con zonas rurales."
+    }
+}

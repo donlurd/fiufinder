@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - FiuFinder</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Vinculamos el CSS global -->
+</head>
+
+<body>
+    <header>
+        <h1>Galería</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="galeria.html">Galería</a>
+            <a href="camara.html">Cámara</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>Toma/Sube una foto para identificar un ave</h2>
+            <div class="inputHolder">
+                <input type="file" accept="image/*" capture="camera" class="uploadInput" id="fileInput" />
+            </div>
+            <img id="preview" alt="Aquí se mostrará la imagen que subas" class="preview-image" />
+            <div id="resultado" class="resultado"></div>
+            <button id="btn-detectar" class="btn-detectar" disabled>Capturar información</button> 
+            <div id="info-ave"></div>      
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script type="text/javascript">
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const resultado = document.getElementById('resultado');
+        const clases = ["aguilucho 0", 
+                        "chincol 1",
+                        "cometocino 2",
+                        "condor 3",
+                        "espatula 4",
+                        "fiu 5",
+                        "garza cuca 6",
+                        "gaviota argentea 7",
+                        "huairavillo 8",
+                        "jilguero chileno 9",
+                        "lechuza 10",
+                        "loica 11",
+                        "martin pescador 12",
+                        "ñandu 13",
+                        "pajaro huala 14",
+                        "parina grande 15",
+                        "pato real 16",
+                        "pelicano 17",
+                        "perdiz chilena 18",
+                        "peuco 19",
+                        "picaflor 20",
+                        "tiuque 21",
+                        "tordo 22",
+                        "tortola 23",
+                        "zarapito 24"];
+
+        let modelo = null;
+        (async () => {
+            console.log("Cargando modelo...");
+            modelo = await tf.loadGraphModel("model.json");
+            console.log("Modelo cargado...");
+        })();
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const imageURL = URL.createObjectURL(file);
+                preview.src = imageURL;
+                preview.style.display = 'block';
+                preview.alt = "Vista previa de la imagen seleccionada";
+            }
+        });
+
+        preview.addEventListener('load', async () => {
+            const image = tf.browser.fromPixels(preview);
+            const processedImage = tf.image.resizeBilinear(image, [224, 224]);
+            const input = tf.expandDims(processedImage.toFloat().div(255), 0);
+            const prediction = await modelo.predict(input).data();
+            const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
+            console.log("indice", maxPredictionIndex);
+            const prediccion = clases[maxPredictionIndex];
+            console.log("Predicción", prediccion);
+            const valorPrediction = Math.max(...prediction);
+            console.log("valorPrediction:", valorPrediction)
+            resultado.innerHTML = `<p><strong>Predicción:</strong> ${prediccion}</p>`;
+        });
+    </script>
+</body>
+
+</html>
