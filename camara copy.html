@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cámara - FiuFinder</title>
-    <link rel="icon" type="image/x-icon" href="logo.ico"> <!-- Favicon -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -27,8 +26,9 @@
                 <div><canvas id="canvas" width="400" height="400"></canvas></div>
                 <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400"
                         style="display: none;" /></div>
-
-                <button id="captureButton" class="btn-capture">Capturar foto</button>
+                <label>
+                    <button id="captureButton" class="btn-capture"><img src="IconSnapDark.png"></button>
+                </label>
                 <button id="retomarButton" style="display:none;">Volver a la Cámara</button>
                 <!--<canvas id="canvas" style="display:none;"></canvas> -->
                 <div id="prediccion" style="display: none;">

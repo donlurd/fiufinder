@@ -7,6 +7,7 @@
     <title>Galería - FiuFinder</title>
     <link rel="icon" type="image/x-icon" href="logo.ico"> <!-- Favicon -->
     <link rel="stylesheet" href="styles.css"> <!-- Vinculamos el CSS global -->
+    <link rel="stylesheet" href="button.css"> <!-- Vinculamos el CSS global -->
 </head>
 
 <body>
@@ -23,7 +24,11 @@
         <section class="input-section">
             <h2>Toma/Sube una foto para identificar un ave</h2>
             <div class="inputHolder">
-                <input type="file" accept="image/*" capture="camera" class="uploadInput" id="fileInput" />
+                <label class="cameraButton">
+
+                    <input type="file" accept="image/*;capture=camera" class="uploadInput" id="fileInput" />
+                    <img id="preview" alt="Aquí se mostrará la imagen que subas" class="preview-image" />
+                </label>
             </div>
             <img id="preview" alt="Aquí se mostrará la imagen que subas" class="preview-image" />
             <div id="resultado" class="resultado"></div>

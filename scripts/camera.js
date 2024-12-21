@@ -1,6 +1,34 @@
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const listaAves = [
+    { "id": 0, "nombre": "Aguilucho" },
+    { "id": 1, "nombre": "Chincol" },
+    { "id": 2, "nombre": "Cometocino" },
+    { "id": 3, "nombre": "Cóndor" },
+    { "id": 4, "nombre": "Espatula" },
+    { "id": 5, "nombre": "Fiu" },
+    { "id": 6, "nombre": "Garza Cuca" },
+    { "id": 7, "nombre": "Gaviota Argéntea" },
+    { "id": 8, "nombre": "Huairavillo" },
+    { "id": 9, "nombre": "Jilguero Chileno" },
+    { "id": 10, "nombre": "Lechuza" },
+    { "id": 11, "nombre": "Loica" },
+    { "id": 12, "nombre": "Martin Pescador" },
+    { "id": 13, "nombre": "Ñandú" },
+    { "id": 14, "nombre": "Pájaro Huala" },
+    { "id": 15, "nombre": "Parina Grande" },
+    { "id": 16, "nombre": "Pato Real" },
+    { "id": 17, "nombre": "Pelicano" },
+    { "id": 18, "nombre": "Perdiz Chilena" },
+    { "id": 19, "nombre": "Peuco" },
+    { "id": 20, "nombre": "Picaflor" },
+    { "id": 21, "nombre": "Tiuque" },
+    { "id": 22, "nombre": "Tordo" },
+    { "id": 23, "nombre": "Tórtola" },
+    { "id": 24, "nombre": "Zarapito" }
+]
+
 //Cons Resultados
 const prediccion = document.getElementById("prediccion");
 const resultado = document.getElementById("resultado");
@@ -61,46 +89,43 @@ async function predecir() {
         const inputTensor = tf.tidy(() => {
             const img = tf.browser.fromPixels(capturedImage); //a que imagen se le hace la prediccion
             const resized = tf.image.resizeBilinear(img, [224, 224]);
-            const normalized = resized.toFloat().div(255.0);
+            const normalized = resized.toFloat().div(255);
             return normalized.expandDims(0);
         });
 
         const prediction = await modelo.predict(inputTensor).data();
-        console.log("valors:", prediction);
-        console.log("max:", Math.max(...prediction));
+        console.log("\n valors:", prediction);
         const valorPrediction = Math.max(...prediction);
-        if (valorPrediction < 0.8) {
-            resultado.textContent = `No se detectó ninguna ave`;
-            btnDetectar.style.display = "none"
-            infoAve.style.display= "none"
+        console.log("valorPrediction - valor maximo:", valorPrediction)
+        const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
+        console.log("maxPredictionIndex:", maxPredictionIndex);
+        const prediccionActual = listaAves.find(listaAves => listaAves.id === maxPredictionIndex)?.nombre;
+        if (valorPrediction < 0.68) {
+            resultado.textContent = `No se detectó ninguna ave, intenta una vez mas.`;
+        } else if (valorPrediction < 0.85) {
+            resultado.textContent = `Posible deteccion: ${prediccionActual}. \n Intenta Enfocar mejor la imagen.`;
+            lastPrediction = prediccionActual;
+            tf.dispose(inputTensor);
         } else {
-            const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
-            console.log("maxPredictionIndex:", maxPredictionIndex);
-            const clases = ["agu","chi","com","con","mtp","pjh","peu","tiu","ttc","ndu"];
-            const prediccionActual = clases[maxPredictionIndex];
-
             resultado.textContent = `Predicción: ${prediccionActual}`;
-            btnDetectar.style.display = "block"
-            infoAve.style.display= "block"
-
-            if (prediccionActual === lastPrediction) {
-                stablePredictionTime += 500;
-                if (stablePredictionTime >= predictionThreshold) {
-                    btnDetectar.classList.add("activo");
-                    btnDetectar.disabled = false;
-                }
-            } else {
-                stablePredictionTime = 0;
-                btnDetectar.classList.remove("activo");
-                btnDetectar.disabled = true;
-            }
-
             lastPrediction = prediccionActual;
             tf.dispose(inputTensor);
         }
+        if (prediccionActual === lastPrediction) {
+            stablePredictionTime += 500;
+            if (stablePredictionTime >= predictionThreshold) {
+                btnDetectar.classList.add("activo");
+                btnDetectar.disabled = false;
+            }
+        } else {
+            stablePredictionTime = 0;
+            btnDetectar.classList.remove("activo");
+            btnDetectar.disabled = true;
+        }
     }
-    setTimeout(predecir, 500);
+    // setTimeout(predecir, 500); para capturar automaticamente cada 500ms. para deteccion a tiempo real
 }
+
 function procesarCamara() {
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
     setTimeout(procesarCamara, 20);
@@ -124,6 +149,7 @@ function capturarFoto() {
 
 }
 captureButton.addEventListener("click", capturarFoto);
+captureButton.addEventListener("click", predecir);
 
 //Funcion volver a la camara
 function retomarCamara() {
@@ -135,7 +161,6 @@ function retomarCamara() {
 }
 retomarButton.addEventListener('click', retomarCamara);
 
-
 // Cargar información del ave desde el archivo
 async function cargarDatosAve(ave) {
     const response = await fetch("aves-datos.txt");
@@ -144,11 +169,11 @@ async function cargarDatosAve(ave) {
     if (avesInfo[ave]) {
         const datos = avesInfo[ave];
         infoAve.innerHTML = `
-            <h3>${ave}</h3>
-            <p><strong>Descripción:</strong> ${datos.descripcion}</p>
-            <p><strong>Origen:</strong> ${datos.origen}</p>
-            <p><strong>Datos:</strong> ${datos.datos}</p>
-        `;
+    <h3>${ave}</h3>
+    <p><strong>Descripción:</strong> ${datos.descripcion}</p>
+    <p><strong>Origen:</strong> ${datos.origen}</p>
+    <p><strong>Datos:</strong> ${datos.datos}</p>
+`;
     }
 }
 

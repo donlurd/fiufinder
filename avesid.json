@@ -1,0 +1,102 @@
+[
+    {
+        "id": 0,
+        "nombre": "Aguilucho"
+    },
+    {
+        "id": 1,
+        "nombre": "Chincol"
+    },
+    {
+        "id": 2,
+        "nombre": "Cometocino"
+    },
+    {
+        "id": 3,
+        "nombre": "Condor"
+    },
+    {
+        "id": 4,
+        "nombre": "Espatula"
+    },
+    {
+        "id": 5,
+        "nombre": "Fiu"
+    },
+    {
+        "id": 6,
+        "nombre": "Garza Cuca"
+    },
+    {
+        "id": 7,
+        "nombre": "Gaviota Argentea"
+    },
+    {
+        "id": 8,
+        "nombre": "Huairavillo"
+    },
+    {
+        "id": 9,
+        "nombre": "Jilguero Chileno"
+    },
+    {
+        "id": 10,
+        "nombre": "Lechuza"
+    },
+    {
+        "id": 11,
+        "nombre": "Loica"
+    },
+    {
+        "id": 12,
+        "nombre": "Martin Pescador"
+    },
+    {
+        "id": 13,
+        "nombre": "Ñandu"
+    },
+    {
+        "id": 14,
+        "nombre": "Pajaro Huala"
+    },
+    {
+        "id": 15,
+        "nombre": "Parina Grande"
+    },
+    {
+        "id": 16,
+        "nombre": "Pato Real"
+    },
+    {
+        "id": 17,
+        "nombre": "Pelicano"
+    },
+    {
+        "id": 18,
+        "nombre": "Perdiz Chilena"
+    },
+    {
+        "id": 19,
+        "nombre": "Peuco"
+    },
+    {
+        "id": 20,
+        "nombre": "Picaflor"
+    },
+    {
+        "id": 21,
+        "nombre": "Tiuque"
+    },
+    {
+        "id": 22,
+        "nombre": "Tordo"
+    },
+    {
+        "id": 23,
+        "nombre": "Tortola"
+    },
+    {
+        "id": 24,
+        "nombre": "Zarapito"
+    }
+]
