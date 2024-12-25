@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cámara - FiuFinder</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico"> <!-- Favicon -->
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="firebaseConfig.js"></script> <!-- Firebase Config -->
+</head>
+
+<body>
+    <header>
+        <h1>Cámara de Reconocimiento</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="galeria.html">Galería</a>
+            <a href="camara.html">Cámara</a>
+            <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
+        </nav>
+    </header>
+
+    <main>
+        <section class="camera-section">
+            <h2>Usa tu cámara para identificar aves</h2>
+            <div class="canvas-container">
+                <video id="video" autoplay playsinline></video> <!-- Mantener el video como fuente -->
+                <div><canvas id="canvas" width="400" height="400"></canvas></div>
+                <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400"
+                        style="display: none;" /></div>
+
+                <button id="captureButton" class="btn-capture">Capturar foto</button>
+                <button id="retomarButton" style="display:none;">Volver a la Cámara</button>
+                <button id="saveButton" style="display:none;">Guardar foto</button>
+                <!--<canvas id="canvas" style="display:none;"></canvas> -->
+                <div id="prediccion" style="display: none;">
+                    <div id="resultado">Predicción: Esperando...</div>
+                    <button id="btn-detectar" class="btn-detectar" disabled>Capturar información</button>
+                    <div id="info-ave"></div>
+                </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script type="module">
+
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+        const auth = getAuth();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const authButtonContainer = document.getElementById("auth-button");
+
+            onAuthStateChanged(auth, (user) => {
+                authButtonContainer.innerHTML = ""; // Limpiar contenido previo
+
+                if (user) {
+                    // Usuario autenticado: mostrar botón de cerrar sesión
+                    const logoutButton = document.createElement("button");
+                    logoutButton.textContent = "Cerrar Sesión";
+                    logoutButton.className = "auth-button logout";
+                    logoutButton.addEventListener("click", async () => {
+                        try {
+                            await signOut(auth);
+                            alert("Has cerrado sesión.");
+                            window.location.href = "index.html"; // Redirigir al inicio
+                        } catch (error) {
+                            console.error("Error al cerrar sesión:", error);
+                        }
+                    });
+                    authButtonContainer.appendChild(logoutButton);
+                } else {
+                    // Usuario no autenticado: mostrar botón de iniciar sesión
+                    const loginButton = document.createElement("a");
+                    loginButton.textContent = "Iniciar Sesión";
+                    loginButton.href = "login.html";
+                    loginButton.className = "auth-button login";
+                    authButtonContainer.appendChild(loginButton);
+                }
+            });
+        });
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const capturedImage = document.getElementById('capturedImage');
+        const captureButton = document.getElementById('captureButton');
+        const retomarButton = document.getElementById('retomarButton');
+        const saveButton = document.getElementById('saveButton');
+
+        let birdIdentified = false;
+
+        captureButton.addEventListener('click', () => {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            capturedImage.src = canvas.toDataURL('image/png');
+            capturedImage.style.display = 'block';
+            video.style.display = 'none';
+            captureButton.style.display = 'none';
+            retomarButton.style.display = 'inline';
+
+            // Simulación de identificación de pájaro
+            birdIdentified = identifyBird(capturedImage.src);
+
+            if (birdIdentified) {
+                saveButton.style.display = 'inline';
+            } else {
+                alert("No se ha identificado ningún pájaro.");
+            }
+        });
+
+        retomarButton.addEventListener('click', () => {
+            capturedImage.style.display = 'none';
+            video.style.display = 'block';
+            captureButton.style.display = 'inline';
+            retomarButton.style.display = 'none';
+            saveButton.style.display = 'none';
+        });
+
+        saveButton.addEventListener('click', () => {
+            if (birdIdentified) {
+                const imageData = capturedImage.src;
+                let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                savedImages.push(imageData);
+                localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                window.location.href = 'perfil.html';
+            } else {
+                alert("No se puede guardar la imagen porque no se ha identificado ningún pájaro.");
+            }
+        });
+
+        function identifyBird(imageSrc) {
+            const fileInput = document.getElementById('fileInput');
+            const preview = document.getElementById('preview');
+            const resultado = document.getElementById('resultado');
+            const infoAve = document.getElementById("info-ave");
+            const btnDetectar = document.getElementById('btn-detectar');
+
+            const listaAves = [
+                { "id": 0, "nombre": "Aguilucho" },
+                { "id": 1, "nombre": "Chincol" },
+                { "id": 2, "nombre": "Cometocino" },
+                { "id": 3, "nombre": "Cóndor" },
+                { "id": 4, "nombre": "Espatula" },
+                { "id": 5, "nombre": "Fiu" },
+                { "id": 6, "nombre": "Garza Cuca" },
+                { "id": 7, "nombre": "Gaviota Argéntea" },
+                { "id": 8, "nombre": "Huairavillo" },
+                { "id": 9, "nombre": "Jilguero Chileno" },
+                { "id": 10, "nombre": "Lechuza" },
+                { "id": 11, "nombre": "Loica" },
+                { "id": 12, "nombre": "Martin Pescador" },
+                { "id": 13, "nombre": "Ñandú" },
+                { "id": 14, "nombre": "Pájaro Huala" },
+                { "id": 15, "nombre": "Parina Grande" },
+                { "id": 16, "nombre": "Pato Real" },
+                { "id": 17, "nombre": "Pelicano" },
+                { "id": 18, "nombre": "Perdiz Chilena" },
+                { "id": 19, "nombre": "Peuco" },
+                { "id": 20, "nombre": "Picaflor" },
+                { "id": 21, "nombre": "Tiuque" },
+                { "id": 22, "nombre": "Tordo" },
+                { "id": 23, "nombre": "Tórtola" },
+                { "id": 24, "nombre": "Zarapito" }
+            ]
+
+            let modelo = null;
+            let lastPrediction = null;
+            let stablePredictionTime = 0;
+            const predictionThreshold = 3000; // 3 segundos
+            async function cargarModelo() {
+                console.log("Cargando modelo...");
+                modelo = await tf.loadGraphModel("model.json");
+                //modelo = await tf.loadLayersModel("model.json");
+                console.log("Modelo cargado...");
+            }
+
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const imageURL = URL.createObjectURL(file);
+                    preview.src = imageURL;
+                    preview.style.display = 'block';
+                    preview.alt = "Vista previa de la imagen seleccionada";
+                }
+            });
+
+            preview.addEventListener('load', async () => {
+                if (modelo) {
+                    const inputTensor = tf.tidy(() => {
+                        const image = tf.browser.fromPixels(preview);
+                        const processedImage = tf.image.resizeBilinear(image, [224, 224]);
+                        const input = tf.expandDims(processedImage.toFloat().div(255), 0);
+                        return input;
+                    })
+                    const prediction = await modelo.predict(inputTensor).data();
+                    //**//
+                    console.log("\n valors:", prediction);
+                    const valorPrediction = Math.max(...prediction);
+                    console.log("valorPrediction - valor maximo:", valorPrediction)
+                    const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
+                    console.log("maxPredictionIndex:", maxPredictionIndex);
+                    const prediccionActual = listaAves.find(listaAves => listaAves.id === maxPredictionIndex)?.nombre;
+                    if (valorPrediction < 0.68) {
+                        resultado.textContent = `No se detectó ninguna ave, intenta una vez mas.`;
+                    } else if (valorPrediction < 0.85) {
+                        resultado.textContent = `Posible deteccion: ${prediccionActual}. \n Intenta Enfocar mejor la imagen.`;
+                        lastPrediction = prediccionActual;
+                        tf.dispose(inputTensor);
+                    } else {
+                        resultado.textContent = `Predicción: ${prediccionActual}`;
+                        console.log("Predicción: ", prediccionActual);
+                        lastPrediction = prediccionActual;
+                        console.log("lastPrediction: ", lastPrediction);
+                        tf.dispose(inputTensor);
+                    }
+                    if (prediccionActual === lastPrediction) {
+                        stablePredictionTime += 500;
+                        if (stablePredictionTime >= predictionThreshold) {
+                            btnDetectar.classList.add("activo");
+                            btnDetectar.disabled = false;
+                        }
+                    } else {
+                        stablePredictionTime = 0;
+                        btnDetectar.classList.remove("activo");
+                        btnDetectar.disabled = true;
+                    }
+                    return true;
+                }
+
+            });
+            async function cargarDatosAve(ave) {
+                const response = await fetch("aves-datos.txt");
+                const data = await response.text();
+                const avesInfo = JSON.parse(data);
+                console.log("avesInfo:", avesInfo);
+                if (avesInfo[ave]) {
+                    const datos = avesInfo[ave];
+                    infoAve.innerHTML = `
+            <h3>${ave}</h3>
+            <p><strong>Descripción:</strong> ${datos.descripcion}</p>
+            <p><strong>Origen:</strong> ${datos.origen}</p>
+            <p><strong>Datos:</strong> ${datos.datos}</p>
+        `;
+                }
+            }
+
+            btnDetectar.addEventListener("click", () => {
+                if (lastPrediction) {
+                    cargarDatosAve(lastPrediction);
+                }
+            });
+            cargarModelo();
+            return true; // Simulación: siempre identifica un pájaro
+        }
+    </script>
+    </script>
+    <script src="/scripts/camera.js"></script>
+</body>
+</html>

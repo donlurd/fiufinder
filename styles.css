@@ -292,6 +292,16 @@ canvas {
   height: auto;
 }
 
+.foto{
+  display: block;
+  margin: 10px auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  max-width: 100%;
+  width: 400px;
+  height: auto;
+}
+
 .btn-cambiar-camara {
   display: inline-block;
   background-color: #F83758;

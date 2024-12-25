@@ -1,17 +1,128 @@
+
 {
-    "Cóndor": {
-        "descripcion": "El cóndor es un ave carroñera de gran tamaño.",
-        "origen": "Andes de América del Sur.",
-        "datos": "Es considerado un símbolo nacional en varios países."
+    "Aguilucho":{
+      "name": "Geranoaetus polyosoma",
+      "origen": "Habita en Sudamérica, desde Colombia hasta Tierra del Fuego, en zonas montañosas y abiertas.",
+      "datos": "Es un ave rapaz de la familia Accipitridae. Se alimenta de pequeños mamíferos, aves y reptiles, que caza utilizando su excelente vista y rápidas embestidas. Suele anidar en acantilados o árboles altos."
     },
-    "Huala": {
-        "descripcion": "La huala es un ave acuática típica de lagos y lagunas.",
-        "origen": "Chile y Argentina.",
-        "datos": "Es conocida por su canto nocturno característico."
+   "Chincol": {
+      "name": "Zonotrichia capensis",
+      "origen": "Presente en gran parte de América del Sur, en zonas rurales, urbanas y bosques abiertos.",
+      "datos": "Es un ave pequeña de la familia Passerellidae. Se alimenta de semillas e insectos, que recoge del suelo. Su canto melodioso es característico y anida en arbustos o árboles bajos."
     },
-    "Tórtola": {
-        "descripcion": "La tórtola es un ave terrestre de tamaño mediano.",
-        "origen": "Diversos continentes, incluyendo América del Sur.",
-        "datos": "Se asocia frecuentemente con zonas rurales."
+    "Cometocino":{
+      "name": "Phrygilus patagonicus",
+      "origen": "Habita en los bosques templados de Chile y Argentina, especialmente en zonas de alta montaña.",
+      "datos": "Es un ave de la familia Thraupidae. Se alimenta de semillas, frutos e insectos pequeños. Construye sus nidos en matorrales densos y es conocida por su colorido plumaje."
+    },
+    "Cóndor":{
+      "name": "Vultur gryphus",
+      "origen": "Distribuido en los Andes de Sudamérica y algunas zonas de la Patagonia.",
+      "datos": "Es el ave voladora más grande del mundo. Se alimenta de carroña, detectándola desde grandes alturas gracias a su aguda vista. Anida en acantilados altos y es símbolo de los Andes."
+    },
+    "Espátula":{
+      "name": "Platalea ajaja",
+      "origen": "Se encuentra en zonas húmedas y pantanosas de América, desde el sur de Estados Unidos hasta Argentina.",
+      "datos": "Pertenece a la familia Threskiornithidae. Se alimenta de pequeños peces y crustáceos, que filtra del agua con su peculiar pico en forma de espátula. Anida en colonias cerca de lagos y estuarios."
+    },
+    "Fiu":{
+      "name": "Elaenia albiceps",
+      "origen": "Habita en bosques templados de Sudamérica, especialmente en Chile y Argentina.",
+      "datos": "Es un ave pequeña de la familia Tyrannidae. Se alimenta de insectos y frutas pequeñas. Es migratoria y su canto característico le da su nombre común."
+    },
+    "Garza Cuca":{
+      "name": "Ardea cocoi",
+      "origen": "Se encuentra en América del Sur, en lagos, ríos y pantanos.",
+      "datos": "Pertenece a la familia Ardeidae. Se alimenta de peces, ranas e insectos acuáticos, que captura al acecho. Anida en árboles cerca del agua y es de gran tamaño, con un plumaje grisáceo."
+    },
+    "Gaviota Argéntea":{
+      "name": "Larus argentatus",
+      "origen": "Distribuida en regiones costeras de América del Norte y Europa.",
+      "datos": "Es un ave de la familia Laridae. Se alimenta de peces, crustáceos y residuos orgánicos, aprovechando su comportamiento oportunista. Suele anidar en acantilados y dunas costeras."
+    },
+   "Huairavillo": {
+      "name": "Pardirallus sanguinolentus",
+      "origen": "Habita en humedales de América del Sur, desde Colombia hasta Tierra del Fuego.",
+      "datos": "Es un ave de la familia Rallidae. Se alimenta de insectos, pequeños moluscos y semillas, que busca en el barro y la vegetación acuática. Su canto es característico y anida en matorrales cercanos al agua."
+    },
+    "Jilguero Chileno":{
+      "name": "Sicalis luteola",
+      "origen": "Se encuentra en pastizales y zonas abiertas de Chile y Argentina.",
+      "datos": "Es un ave de la familia Thraupidae. Se alimenta de semillas e insectos. Su plumaje amarillo intenso y su canto melodioso lo hacen inconfundible. Suele anidar en arbustos."
+    },
+   "Lechuza": {
+      "name": "Tyto alba",
+      "origen": "Habita en casi todo el mundo, en zonas rurales y urbanas.",
+      "datos": "Es un ave rapaz nocturna de la familia Tytonidae. Se alimenta de pequeños mamíferos, aves e insectos. Anida en edificios abandonados, árboles huecos y grietas de rocas."
+    },
+    "Loica":{
+      "name": "Leistes loyca",
+      "origen": "Se encuentra en pastizales y áreas abiertas de Chile y Argentina.",
+      "datos": "Es un ave de la familia Icteridae. Se alimenta de insectos y semillas. Su pecho rojo intenso es su característica más distintiva. Anida en el suelo, ocultando sus nidos entre la vegetación."
+    },
+    "Martín Pescador":{
+      "name": "Alcedo atthis",
+      "origen": "Se encuentra en Europa, Asia, norte de África y algunas regiones de Oceanía.",
+      "datos": "Pertenece a la familia Alcedinidae. Se alimenta de peces pequeños y crustáceos, que captura sumergiéndose en el agua. Anida en túneles excavados en riberas fluviales y tiene un plumaje brillante con tonos azulados y anaranjados."
+    },
+   "Ñandú":{
+      "name": "Rhea americana",
+      "origen": "Habita en Sudamérica, en pastizales y sabanas de Argentina, Brasil, Paraguay y Uruguay.",
+      "datos": "Es un ave corredora de la familia Rheidae. Se alimenta de plantas, semillas e insectos. Los machos construyen el nido en el suelo y se encargan de incubar los huevos de varias hembras."
+    },
+   "Pájaro Huala":{
+      "name": "Podilymbus podiceps",
+      "origen": "Vive en América, desde Canadá hasta Sudamérica, en lagos y lagunas de agua dulce.",
+      "datos": "Es un ave acuática de la familia Podicipedidae. Se alimenta de peces, insectos y crustáceos, buceando para capturarlos. Construye sus nidos flotantes sobre la vegetación acuática."
+    },
+    "Parina Grande":{ 
+      "name": "Phoenicoparrus andinus",
+      "origen": "Habita en lagos salinos de alta montaña en los Andes de Sudamérica.",
+      "datos": "Es un flamenco de la familia Phoenicopteridae. Se alimenta de algas y pequeños invertebrados filtrados del agua salina. Anida en colonias en las orillas de los lagos."
+    },
+   "Pato Real": { 
+      "name": "Anas platyrhynchos",
+      "origen": "Distribuido en zonas húmedas de casi todo el mundo.",
+      "datos": "Es un ave acuática de la familia Anatidae. Se alimenta de plantas acuáticas, semillas y pequeños invertebrados. Anida cerca de cuerpos de agua y es la especie ancestral del pato doméstico."
+    },
+    "Pelícano":{
+      "name": "Pelecanus thagus",
+      "origen": "Vive en las costas del Pacífico en Sudamérica, desde Perú hasta Chile.",
+      "datos": "Es un ave marina de la familia Pelecanidae. Se alimenta de peces, que captura con su bolsa gular. Anida en acantilados y playas rocosas en colonias."
+    },
+    "Perdiz Chilena":{
+      "name": "Nothoprocta perdicaria",
+      "origen": "Endémica de Chile, habita en zonas abiertas y montañosas.",
+      "datos": "Es un ave terrestre de la familia Tinamidae. Se alimenta de semillas, insectos y frutos. Anida en el suelo, camuflando sus huevos entre la vegetación."
+    },
+   "Peuco": {
+      "name": "Parabuteo unicinctus",
+      "origen": "Distribuido en América desde Estados Unidos hasta Argentina, en zonas abiertas y semiáridas.",
+      "datos": "Es un ave rapaz de la familia Accipitridae. Caza pequeños mamíferos, aves y reptiles, con tácticas cooperativas en grupos. Anida en árboles o acantilados."
+    },
+   "Picaflor": {
+      "name": "Sephanoides sephaniodes",
+      "origen": "Habita en bosques templados y áreas rurales de Chile y Argentina.",
+      "datos": "Es un ave de la familia Trochilidae. Se alimenta del néctar de flores y pequeños insectos. Su vuelo rápido y su capacidad de flotar en el aire son características notables."
+    },
+   "Tiuque":{
+      "name": "Milvago chimango",
+      "origen": "Se encuentra en Sudamérica, desde Ecuador hasta Tierra del Fuego, en variados hábitats abiertos.",
+      "datos": "Es un ave carroñera y oportunista de la familia Falconidae. Se alimenta de carroña, insectos y pequeños animales. Suele ser común en zonas urbanas y rurales, y anida en árboles o estructuras altas."
+    },
+   "Tordo": {
+      "name": "Molothrus bonariensis",
+      "origen": "Habita en Sudamérica, en pastizales y áreas rurales.",
+      "datos": "Es un ave de la familia Icteridae. Es conocido por ser parásito de cría, dejando sus huevos en los nidos de otras aves. Se alimenta de semillas e insectos."
+    },
+   "Tórtola": {
+      "name": "Zenaida auriculata",
+      "origen": "Distribuida en Sudamérica, principalmente en zonas abiertas y semiáridas.",
+      "datos": "Es un ave de la familia Columbidae. Se alimenta de semillas y granos, que recoge del suelo. Anida en árboles o arbustos, construyendo nidos simples de ramas."
+    },
+   "Zarapito": {
+      "name": "Numenius phaeopus",
+      "origen": "Es migratoria y se encuentra en zonas costeras y húmedas de casi todo el mundo.",
+      "datos": "Pertenece a la familia Scolopacidae. Se alimenta de invertebrados que busca en el suelo húmedo. Su largo pico curvado es ideal para cavar en busca de alimento."
     }
 }

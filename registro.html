@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - FiuFinder</title>
     <!-- Firebase SDKs -->
+    <link rel="icon" type="image/x-icon" href="public/logo.ico"> <!-- Favicon -->
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
     <header>
@@ -22,7 +23,18 @@
                 
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" required>
-                
+
+                <label for="confirmPassword">Confirmar Contraseña:</label>
+                <input type="password" id="confirmPassword" required>
+
+                <small id="passwordRules" class="info-message">
+                    La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una minúscula, un número y un carácter especial.
+                </small>
+
+                <div>
+                    <input type="checkbox" id="showPasswords"> Mostrar contraseñas
+                </div>
+
                 <button type="submit">Registrar</button>
             </form>
             <p id="registerError" class="error-message" style="display: none;">Error al registrar el usuario</p>
@@ -30,7 +42,62 @@
             <button onclick="window.location.href='index.html'" class="back-to-home">Volver al Inicio</button>
         </section>
     </main>
-    <script type="module" src="firebaseConfig.js"></script>
-    <script type="module" src="scripts/registro.js"></script>
+    <script type="module">
+        import { auth } from "./firebaseConfig.js";
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+
+        const form = document.getElementById("registerForm");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const showPasswordsCheckbox = document.getElementById("showPasswords");
+        const errorElement = document.getElementById("registerError");
+
+        // Validar contraseña
+        const validatePassword = (password) => {
+            const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            return regex.test(password);
+        };
+
+        // Mostrar/ocultar contraseñas
+        showPasswordsCheckbox.addEventListener("change", () => {
+            const type = showPasswordsCheckbox.checked ? "text" : "password";
+            passwordInput.type = type;
+            confirmPasswordInput.type = type;
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Validar contraseñas
+            if (!validatePassword(password)) {
+                errorElement.textContent = "La contraseña no cumple con los requisitos.";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                errorElement.textContent = "Las contraseñas no coinciden.";
+                errorElement.style.display = "block";
+                return;
+            }
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Cuenta creada con éxito. Por favor verifica tu correo.");
+                window.location.href = "login.html";
+            } catch (error) {
+                if (error.code === "auth/email-already-in-use") {
+                    errorElement.textContent = "El correo ya está en uso. Intenta con otro.";
+                } else {
+                    errorElement.textContent = "Error: " + error.message;
+                }
+                errorElement.style.display = "block";
+            }
+        });
+    </script>
 </body>
 </html>

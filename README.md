@@ -1,11 +1,6 @@
-# Clasificación de perros y gatos
+# Identificador de aves
 
-Este código fuente sirve como apoyo para el video de exportación de modelos de Tensorflow a Tensorflow.js, del canal de YouTube [Ringa Tech](https://youtube.com/RingaTech)
-
-Se trata de un clasificador en tiempo real de perros y gatos con imágenes a color. Puede utilizarse en el celular, solo apunta la cámara al perro o gato que quieres clasificar (puede ser una imagen de la computadora, una foto, o uno de verdad), lo hace todo en el explorador utilizando Tensorflow.js, en base aun modelo entrenado en Python con Tensorflow
-
-## Probar en vivo
-Puedes probar este proyecto en vivo [aquí](https://ringa-tech.com/exportacion/perros-gatos/)
+Se trata de un identificador de aves con imágenes a color. Puede utilizarse en el celular, solo apunta la cámara aves que quieres identificar (puede ser una imagen de la computadora, una foto, o uno de verdad), lo hace todo en el explorador utilizando Tensorflow.js, en base aun modelo entrenado en Python con Tensorflow
 
 ## Cómo utilizarlo
 
@@ -31,9 +26,3 @@ Si quieres abrirlo en tu celular, no se puede solo poner la IP local de tu compu
 - En la línea de comandos aparecerá un enlace HTTPS. Puedes entrar ahí con tu celular, no importa si no estás en la red local.
 - El túnel expira después de 2 horas creo, en dado caso solo reinicias ngrok
 - Abre un explorador en tu celular y ve al enlace HTTPS indicado
-
-### Uso
-Puedes dar clic en el botón de "Cambiar camara" para utilizar la cámara delantera o trasera del celular. Solo apunta la cámara a un perro o gato, y abajo te aparecerá la predicción. Tampoco es el clasificador del futuro entonces si no clasifica perfecto, oops.
-
-## Problemas
-Si tienes un problema, regístralo aquí o déjame un comentario en el video de Youtube. Asegúrate de primero revisar la consola de desarrollador de tu explorador para ver si puedes identificar el problema.

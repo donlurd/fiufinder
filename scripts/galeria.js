@@ -9,7 +9,7 @@ const listaAves = [
     { "id": 1, "nombre": "Chincol" },
     { "id": 2, "nombre": "Cometocino" },
     { "id": 3, "nombre": "Cóndor" },
-    { "id": 4, "nombre": "Espatula" },
+    { "id": 4, "nombre": "Espátula" },
     { "id": 5, "nombre": "Fiu" },
     { "id": 6, "nombre": "Garza Cuca" },
     { "id": 7, "nombre": "Gaviota Argéntea" },
@@ -34,8 +34,7 @@ const listaAves = [
 
 let modelo = null;
 let lastPrediction = null;
-let stablePredictionTime = 0;
-const predictionThreshold = 3000; // 3 segundos
+
 async function cargarModelo() {
     console.log("Cargando modelo...");
     modelo = await tf.loadGraphModel("model.json");
@@ -83,37 +82,37 @@ preview.addEventListener('load', async () => {
             tf.dispose(inputTensor);
         }
         if (prediccionActual === lastPrediction) {
-            stablePredictionTime += 500;
-            if (stablePredictionTime >= predictionThreshold) {
-                btnDetectar.classList.add("activo");
-                btnDetectar.disabled = false;
-            }
+            btnDetectar.classList.add("activo");
+            btnDetectar.style.display = "block";    
         } else {
-            stablePredictionTime = 0;
             btnDetectar.classList.remove("activo");
-            btnDetectar.disabled = true;
+            btnDetectar.style.display = 'none';
         }
     }
-});
+})
 async function cargarDatosAve(ave) {
+    console.log("1",ave);
     const response = await fetch("aves-datos.txt");
     const data = await response.text();
     const avesInfo = JSON.parse(data);
     console.log("avesInfo:", avesInfo);
+    console.log(avesInfo[ave]);
     if (avesInfo[ave]) {
         const datos = avesInfo[ave];
+        console.log("datos:", datos);
         infoAve.innerHTML = `
             <h3>${ave}</h3>
-            <p><strong>Descripción:</strong> ${datos.descripcion}</p>
+            <p><strong>Nombre Científico:</strong> ${datos.name}</p>
             <p><strong>Origen:</strong> ${datos.origen}</p>
             <p><strong>Datos:</strong> ${datos.datos}</p>
         `;
     }
 }
-
 btnDetectar.addEventListener("click", () => {
     if (lastPrediction) {
+        console.log("lastPrediction:", lastPrediction);
         cargarDatosAve(lastPrediction);
     }
-});
+})
+
 cargarModelo();

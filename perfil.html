@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="icon" type="image/x-icon" href="public/logo.ico"> <!-- Favicon -->
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Perfil</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="galeria.html">Galería</a>
+            <a href="camara.html">Cámara</a>
+            <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <h2>Fotos Guardadas</h2>
+            <div id="savedImagesContainer"></div>
+        </section>
+    </main>
+
+    <script>
+        const savedImagesContainer = document.getElementById('savedImagesContainer');
+        const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+
+        if (savedImages.length > 0) {
+            savedImages.forEach(imageData => {
+                const img = document.createElement('img');
+                img.src = imageData;
+                img.className = 'foto';
+                img.alt = 'Imagen Guardada';
+                img.width = 400;
+                img.height = 400;
+                savedImagesContainer.appendChild(img);
+            });
+        } else {
+            const noImageMessage = document.createElement('p');
+            noImageMessage.textContent = 'No hay imágenes guardadas';
+            savedImagesContainer.appendChild(noImageMessage);
+        }
+    </script>
+</body>
+</html>

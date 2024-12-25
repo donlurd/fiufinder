@@ -100,9 +100,10 @@ async function predecir() {
         const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
         console.log("maxPredictionIndex:", maxPredictionIndex);
         const prediccionActual = listaAves.find(listaAves => listaAves.id === maxPredictionIndex)?.nombre;
-        if (valorPrediction < 0.68) {
+        if (valorPrediction < 0.60) {
             resultado.textContent = `No se detectó ninguna ave, intenta una vez mas.`;
-        } else if (valorPrediction < 0.85) {
+            lastPrediction = null
+        } else if (valorPrediction < 0.80) {
             resultado.textContent = `Posible deteccion: ${prediccionActual}. \n Intenta Enfocar mejor la imagen.`;
             lastPrediction = prediccionActual;
             tf.dispose(inputTensor);
@@ -170,7 +171,7 @@ async function cargarDatosAve(ave) {
         const datos = avesInfo[ave];
         infoAve.innerHTML = `
     <h3>${ave}</h3>
-    <p><strong>Descripción:</strong> ${datos.descripcion}</p>
+    <p><strong>Nombre Científico:</strong> ${datos.name}</p>
     <p><strong>Origen:</strong> ${datos.origen}</p>
     <p><strong>Datos:</strong> ${datos.datos}</p>
 `;

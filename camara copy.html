@@ -15,6 +15,7 @@
             <a href="index.html">Inicio</a>
             <a href="galeria.html">Galería</a>
             <a href="camara.html">Cámara</a>
+            <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
         </nav>
     </header>
 
@@ -24,8 +25,8 @@
             <div class="canvas-container">
                 <video id="video" autoplay playsinline></video> <!-- Mantener el video como fuente -->
                 <div><canvas id="canvas" width="400" height="400"></canvas></div>
-                <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400"
-                        style="display: none;" /></div>
+                <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400" 
+                        style="display: none;" /></div><!-- Captura de imagen -->
                 <label>
                     <button id="captureButton" class="btn-capture"><img src="IconSnapDark.png"></button>
                 </label>
