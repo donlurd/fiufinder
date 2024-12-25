@@ -3,6 +3,8 @@ const preview = document.getElementById('preview');
 const resultado = document.getElementById('resultado');
 const infoAve = document.getElementById("info-ave");
 const btnDetectar = document.getElementById('btn-detectar');
+const blurred = document.getElementById('blurred');
+const instruccion = document.getElementById('instruccion');
 
 const listaAves = [
     { "id": 0, "nombre": "Aguilucho" },
@@ -35,6 +37,9 @@ const listaAves = [
 let modelo = null;
 let lastPrediction = null;
 
+var sound = new Audio();
+sound.src = "public/snap.mp3";
+
 async function cargarModelo() {
     console.log("Cargando modelo...");
     modelo = await tf.loadGraphModel("model.json");
@@ -48,7 +53,10 @@ fileInput.addEventListener('change', (event) => {
         const imageURL = URL.createObjectURL(file);
         preview.src = imageURL;
         preview.style.display = 'block';
+        preview.style.border= "2px solid #F83758";
         preview.alt = "Vista previa de la imagen seleccionada";
+        blurred.style.display = 'none';
+        instruccion.style.display = 'none';
     }
 });
 
@@ -83,7 +91,7 @@ preview.addEventListener('load', async () => {
         }
         if (prediccionActual === lastPrediction) {
             btnDetectar.classList.add("activo");
-            btnDetectar.style.display = "block";    
+            btnDetectar.style.display = "block";
         } else {
             btnDetectar.classList.remove("activo");
             btnDetectar.style.display = 'none';
@@ -91,12 +99,9 @@ preview.addEventListener('load', async () => {
     }
 })
 async function cargarDatosAve(ave) {
-    console.log("1",ave);
     const response = await fetch("aves-datos.txt");
     const data = await response.text();
     const avesInfo = JSON.parse(data);
-    console.log("avesInfo:", avesInfo);
-    console.log(avesInfo[ave]);
     if (avesInfo[ave]) {
         const datos = avesInfo[ave];
         console.log("datos:", datos);
@@ -110,9 +115,69 @@ async function cargarDatosAve(ave) {
 }
 btnDetectar.addEventListener("click", () => {
     if (lastPrediction) {
-        console.log("lastPrediction:", lastPrediction);
         cargarDatosAve(lastPrediction);
     }
 })
 
+// barra de navegacion
+
+/*
+
+let homeButton = document.querySelector("#home__button");
+let galeryButton = document.querySelector("#galery__button");
+let cameraButton = document.querySelector("#camara__button");
+let userButton = document.querySelector("#user__button");
+
+
+const goCamera = () => {
+    location.href = "camara.html";
+}
+const goHome = () => {
+    location.href = "index.html";
+}
+const goGalery = () => {
+    location.href = "galeria.html";
+}
+const goUser = () => {
+    location.href ="perfil.html";
+}
+
+homeButton.addEventListener('click', goHome);
+galeryButton.addEventListener('click', goGalery);
+cameraButton.addEventListener('click', goCamera);
+userButton.addEventListener('click', goUser);
+*/
+
+
+/*camera*/
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+function mostrarCamara() {
+    const opciones = {
+        audio: false,
+        video: {
+            facingMode: "environment",
+            width: 400,
+            height: 400,
+        },
+    };
+
+    navigator.mediaDevices.getUserMedia(opciones)
+        .then((stream) => {
+            video.srcObject = stream;
+            procesarCamara();
+        })
+        .catch((err) => {
+            console.error("No se pudo acceder a la cámara:", err);
+        });
+}
+
+// Procesar la cámara en el canvas
+function procesarCamara() {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    setTimeout(procesarCamara, 20);
+}
+mostrarCamara();
 cargarModelo();

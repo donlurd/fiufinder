@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,16 @@
     <link rel="icon" type="image/x-icon" href="public/logo.ico"> <!-- Favicon -->
     <script type="module" src="scripts/firebaseConfig.js"></script> <!-- Configuración de Firebase -->
 </head>
+
 <body class="home">
-    
+    <div class="all__list animate__animated animate__bounceInRight" id="all__list">
+        <div class="all__list__container">
+            <div class="your__list__items" id="your__list__items">
     <!-- Header con navegación -->
     <header class="main-header">
         <h1>FiuFinder</h1>
         <!-- Logo y navegación -->
         <nav>
-            <a href="index.html">Inicio</a>
-            <a href="galeria.html">Galería</a>
-            <a href="camara.html">Cámara</a>
             <div id="auth-button"></div> <!-- Aquí se insertará el botón dinámico -->
         </nav>
     </header>
@@ -27,13 +28,17 @@
         <section class="intro">
             <h2>Descubre el mundo de las aves con FiuFinder</h2>
             <p>
-                <strong>FiuFinder</strong> es una plataforma creada para apasionados de la naturaleza y el avistamiento de aves.
-                Con tecnología de inteligencia artificial, identificamos y proporcionamos información detallada sobre especies de aves,
+                <strong>FiuFinder</strong> es una plataforma creada para apasionados de la naturaleza y el avistamiento
+                de aves.
+                Con tecnología de inteligencia artificial, identificamos y proporcionamos información detallada sobre
+                especies de aves,
                 permitiéndote conectar más profundamente con el entorno natural.
             </p>
             <p>
-                Esta app es ideal para ornitólogos, fotógrafos, estudiantes, y amantes de la naturaleza que desean explorar y
-                compartir sus hallazgos. Además, su fácil acceso la convierte en una herramienta esencial para todos, desde principiantes
+                Esta app es ideal para ornitólogos, fotógrafos, estudiantes, y amantes de la naturaleza que desean
+                explorar y
+                compartir sus hallazgos. Además, su fácil acceso la convierte en una herramienta esencial para todos,
+                desde principiantes
                 hasta expertos. ¡Anímate a probarla y únete a nuestra comunidad!
             </p>
         </section>
@@ -47,20 +52,109 @@
                 <div class="carousel-item"><img src="/public/tortola.png" alt="Imagen 3"></div>
             </div>
         </section>
-
+    
         <!-- Sección destacada con el Martín Pescador -->
         <section class="highlight">
             <h2>¿Sabías que...?</h2>
             <div class="highlight-content">
                 <img src="/public/martinolix.png" alt="Martín Pescador" class="highlight-image">
                 <p>
-                    El <strong>Martín Pescador</strong> es un ave fascinante conocida por su habilidad para pescar en vuelo.
-                    Su figura ágil y colores vibrantes lo convierten en uno de los favoritos para los fotógrafos de naturaleza.
+                    El <strong>Martín Pescador</strong> es un ave fascinante conocida por su habilidad para pescar en
+                    vuelo.
+                    Su figura ágil y colores vibrantes lo convierten en uno de los favoritos para los fotógrafos de
+                    naturaleza.
                 </p>
             </div>
         </section>
+    </div>
     </main>
+    <!-- barra navegacion -->
+    <div class="bottom__nav">
+        <!-- Home -->
+        <svg id="home__button" class="btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24">
+            <path
+                d="M24 12.148l-1.361 1.465-10.639-9.883-10.639 9.868-1.361-1.465 12-11.133 12 11.148zm-4 1.749l-2 10.103h-12l-2-10.103 8-7.444 8 7.444zm-7 6.103c0-.552-.448-1-1-1s-1 .448-1 1 .448 1 1 1 1-.448 1-1zm1-5c0-1.105-.896-2-2-2s-2 .895-2 2 .896 2 2 2 2-.895 2-2z" />
+        </svg>
+        <!-- Galeria -->
+        <svg class="btn" id="galery__button" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000"
+            height="24" width="24">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <defs>
+                    <style>
+                        .cls-1 {
+                            fill: #000000;
+                        }
+                    </style>
+                </defs>
+                <title></title>
+                <g data-name="Layer 6" id="Layer_6">
+                    <path class="cls-1"
+                        d="M5,5V27H27V5ZM25,7V17.83l-3.5-3.25-5.71,6.33L12,18.83,7,23.65V7ZM8.49,25l3.86-3.71,3.86,2.13,5.41-6L25,20.56V25Z">
+                    </path>
+                    <rect class="cls-1" height="2" width="1.81" x="11.06" y="15"></rect>
+                </g>
+            </g>
+        </svg>
 
+        <!-- Camara -->
+        <svg class="btn" id="camara__button" fill="#000000" height="24" width="24" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 487 487"
+            xml:space="preserve">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g>
+                    <g>
+                        <path
+                            d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z M440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9 v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3z M97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45z M358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <!-- Login -->
+        <svg class="btn" id="user__button" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g clip-path="url(#clip0_15_82)">
+                    <rect width="24" height="24" fill="white"></rect>
+                    <g filter="url(#filter0_d_15_82)">
+                        <path
+                            d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z"
+                            fill="#000000"></path>
+                    </g>
+                </g>
+                <defs>
+                    <filter id="filter0_d_15_82" x="2.55444" y="3.5" width="18.8911" height="19"
+                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                            result="hardAlpha">
+                        </feColorMatrix>
+                        <feOffset dy="1"></feOffset>
+                        <feGaussianBlur stdDeviation="0.5"></feGaussianBlur>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0">
+                        </feColorMatrix>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_15_82">
+                        </feBlend>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_15_82" result="shape">
+                        </feBlend>
+                    </filter>
+                    <clipPath id="clip0_15_82">
+                        <rect width="24" height="24" fill="white"></rect>
+                    </clipPath>
+                </defs>
+            </g>
+        </svg>
+    </div>
+    <!-- fin barra navegacion-->
+    </div>
+    </div>
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 FiuFinder - Todos los derechos reservados. v2.3</p>
@@ -69,5 +163,7 @@
     <!-- Script para manejo de login/logout -->
     <script type="module" src="scripts/login/index_login.js"></script>
     <script type="module" src="scripts/registro.js"></script>
+    <script src="scripts/links.js"></script>
 </body>
+
 </html>

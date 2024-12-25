@@ -113,54 +113,21 @@ async function predecir() {
             tf.dispose(inputTensor);
         }
         if (prediccionActual === lastPrediction) {
-            stablePredictionTime += 500;
-            if (stablePredictionTime >= predictionThreshold) {
-                btnDetectar.classList.add("activo");
-                btnDetectar.disabled = false;
-            }
+            saveButton.style.display = 'block'
+            saveButton.addEventListener('click', () => {
+                    const imageData = capturedImage.src;
+                    let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+                    savedImages.push(imageData);
+                    localStorage.setItem('savedImages', JSON.stringify(savedImages));
+            });
+            btnDetectar.classList.add("activo");
+            btnDetectar.style.display = "block";
         } else {
-            stablePredictionTime = 0;
             btnDetectar.classList.remove("activo");
-            btnDetectar.disabled = true;
+            btnDetectar.style.display = 'none';
         }
     }
-    // setTimeout(predecir, 500); para capturar automaticamente cada 500ms. para deteccion a tiempo real
 }
-
-function procesarCamara() {
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    setTimeout(procesarCamara, 20);
-}
-//Funcion Capturar foto
-function capturarFoto() {
-    const context = canvas.getContext('2d')
-    canvas.width = video.videoWidth
-    canvas.height = video.videoHeight
-    context.drawImage(video, 0, 0, canvas.width, canvas.height)
-    const dataUrl = canvas.toDataURL('image/png')
-    capturedImage.src = dataUrl
-
-    //ocultar video
-    canvas.style.display = 'none'
-    capturedImage.style.display = 'block'
-    captureButton.style.display = 'none'
-    retomarButton.style.display = 'block'
-    //mostrar resultados
-    prediccion.style.display = 'block'
-
-}
-captureButton.addEventListener("click", capturarFoto);
-captureButton.addEventListener("click", predecir);
-
-//Funcion volver a la camara
-function retomarCamara() {
-    canvas.style.display = 'block'
-    capturedImage.style.display = 'none'
-    captureButton.style.display = 'block'
-    retomarButton.style.display = 'none'
-    prediccion.style.display = 'none'
-}
-retomarButton.addEventListener('click', retomarCamara);
 
 // Cargar información del ave desde el archivo
 async function cargarDatosAve(ave) {
@@ -183,6 +150,66 @@ btnDetectar.addEventListener("click", () => {
         cargarDatosAve(lastPrediction);
     }
 });
+
+function procesarCamara() {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    setTimeout(procesarCamara, 20);
+}
+//Funcion Capturar foto
+function capturarFoto() {
+    const context = canvas.getContext('2d')
+    canvas.width = video.videoWidth
+    canvas.height = video.videoHeight
+    context.drawImage(video, 0, 0, canvas.width, canvas.height)
+    const dataUrl = canvas.toDataURL('image/png')
+    capturedImage.src = dataUrl
+
+    //ocultar video
+    canvas.style.display = 'none'
+    capturedImage.style.display = 'block'
+    captureButton.style.display = 'none'
+    retomarButton.style.display = 'block'
+    //mostrar resultados
+    prediccion.style.display = 'block'
+    btnDetectar.style.display = 'block'
+    
+
+}
+var sound = new Audio();
+sound.src = "public/snap.mp3";
+
+captureButton.addEventListener("click", capturarFoto);
+captureButton.addEventListener("click", predecir);
+
+/*guardar*/
+
+const saveButton = document.getElementById('saveButton');
+
+let birdIdentified = false;
+
+captureButton.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    capturedImage.src = canvas.toDataURL('image/png');
+    capturedImage.style.display = 'block';
+    video.style.display = 'none';
+    captureButton.style.display = 'none';
+    retomarButton.style.display = 'inline';
+});
+
+
+
+//Funcion volver a la camara
+function retomarCamara() {
+    canvas.style.display = 'block'
+    capturedImage.style.display = 'none'
+    retomarButton.style.display = 'none'
+    prediccion.style.display = 'none'
+    saveButton.style.display = 'none'
+}
+retomarButton.addEventListener('click', retomarCamara);
+
+
 
 cargarModelo();
 mostrarCamara();

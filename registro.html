@@ -43,8 +43,10 @@
         </section>
     </main>
     <script type="module">
-        import { auth } from "./firebaseConfig.js";
         import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+        
+        import { auth } from "./firebaseConfig.js";
+        
 
         const form = document.getElementById("registerForm");
         const emailInput = document.getElementById("email");

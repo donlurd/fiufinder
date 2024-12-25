@@ -242,9 +242,9 @@ button:active {
 }
 
 .preview-image {
-  max-width: 100%;
+  width: 100%;
   margin: 15px 0;
-  border: 2px solid #F83758;
+  /*border: 2px solid #F83758;*/
   border-radius: 10px;
 }
 
@@ -284,7 +284,7 @@ video {
 
 canvas {
   display: block;
-  margin: 10px auto;
+  margin: auto;
   border: 2px solid #ccc;
   border-radius: 10px;
   max-width: 100%;
@@ -365,6 +365,7 @@ canvas {
   cursor: not-allowed;
   transition: background-color 0.3s ease;
   display: none;
+  justify-self: center;
 }
 
 .btn-detectar.activo {
@@ -536,4 +537,151 @@ canvas {
   50% {
     opacity: 0;
   }
+}
+
+/*Barra navegacion*/
+
+
+.all__list .all__list__container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.all__list{
+  height: 100%;
+  width: 100vw;
+  transition: 0.4s;
+  position: fixed;
+  background-color: white;
+  inset: 0;
+  z-index: 90;
+}
+
+
+.all__list .bottom__nav{
+  height: 60px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  box-shadow: 0px -4px 16px rgb(226, 226, 226);
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+}
+
+.all__list .bottom__nav span#bottom__nav__plus{
+  background-color: #F83758;
+  height: 60px;
+  width: 60px;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  position: relative;
+  top: -30px;
+  transition: 0.4s;
+  z-index: 2;
+}
+.all__list .bottom__nav span#bottom__nav__plus:active{
+  background-color: rgb(255, 111, 0);
+  border: 12px solid rgb(255, 111, 0);
+}
+
+.all__list .bottom__nav span#bottom__nav__plus svg{
+  fill: white;
+  height: 15px;
+}
+
+.all__list .bottom__nav span#back__button{
+  display: none;
+}
+
+.all__list .bottom__nav span#back__button img{
+  height: 35px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+.all__list .your__list__items{
+  flex: 1;
+
+  overflow-y: auto;
+}
+
+.all__list .your__list__items .single__item{
+  width: 90%;
+  background-color: #fff;
+  color: #000;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 16px rgb(194, 192, 192);
+  padding: 0 10px;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Ocultar input*/
+
+.inputHolder > input {
+  visibility:hidden;
+  width:0;
+  height:0
+}
+
+.video-galery{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  object-position: center;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  filter: blur(5px);
+}
+
+.border-camera{
+  position: absolute;
+  border: 15px solid #CFE0E6;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.5);
+  right: calc(5vw);
+  left: calc(5vw);
+  top: calc(5vw);
+  bottom: 5vw;
+  /* border: 1px solid blue; */
+  border-radius: 50%;
+  overflow: hidden;
+  background: black;
+  /* transition: ease 0.2s all; */
+  
+}
+
+.camera-image-holder {
+  position: relative;
+  width: 100vw;
+  height: 100vw;
+  max-width: 480px;
+  max-height: 480px;
+  margin: auto;
+  margin-top: 40px;
+  
+}
+
+.camera-button{
+    transition: filter 0.2s;
+    filter: saturate(200%);
+}
+
+.div-botones{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }

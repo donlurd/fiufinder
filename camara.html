@@ -11,38 +11,134 @@
 </head>
 
 <body>
-    <header>
-        <h1>Cámara de Reconocimiento</h1>
-        <nav>
-            <a href="index.html">Inicio</a>
-            <a href="galeria.html">Galería</a>
-            <a href="camara.html">Cámara</a>
-            <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
-        </nav>
-    </header>
+    <div class="all__list animate__animated animate__bounceInRight" id="all__list">
+        <div class="all__list__container">
+            <div class="your__list__items" id="your__list__items">
+                <header>
+                    <h1>Cámara de Reconocimiento</h1>
+                    <nav>
+                        <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
+                    </nav>
+                </header>
 
-    <main>
-        <section class="camera-section">
-            <h2>Usa tu cámara para identificar aves</h2>
-            <div class="canvas-container">
-                <video id="video" autoplay playsinline></video> <!-- Mantener el video como fuente -->
-                <div><canvas id="canvas" width="400" height="400"></canvas></div>
-                <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400"
-                        style="display: none;" /></div>
+                <main>
+                    <section class="camera-section">
+                        <h2>Usa tu cámara para identificar aves</h2>
+                        <div class="canvas-container">
+                            <video id="video" autoplay playsinline></video> <!-- Mantener el video como fuente -->
+                            <div><canvas id="canvas" width="400" height="400"></canvas></div>
+                            <div><img id="capturedImage" class="foto" alt="Imagen Capturada" width="400" height="400"
+                                    style="display: none;" /></div>
+                            <button id="captureButton" class="btn-capture" style="display: none;">Capturar foto</button>
+                            <div><button id="retomarButton" style="display:none;justify-content: center;">Volver a la
+                                    Cámara</button></div>
+                            <div class="div-botones"><button id="saveButton"
+                                    style="display:none; align-items: center;">Guardar foto</button></div>
+                            <!--<canvas id="canvas" style="display:none;"></canvas> -->
+                            <div id="prediccion" style="display: none;">
+                                <div id="resultado">Predicción: Esperando...</div>
+                                <div class="div-botones"> <button id="btn-detectar" class="btn-detectar">Capturar
+                                        información</button></div>
+                                <div id="info-ave"></div>
+                            </div>
+                    </section>
+                </main>
+            </div>
+            <!-- barra navegacion -->
+            <div class="bottom__nav">
+                <!-- Home -->
+                <svg id="home__button" class="btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24">
+                    <path
+                        d="M24 12.148l-1.361 1.465-10.639-9.883-10.639 9.868-1.361-1.465 12-11.133 12 11.148zm-4 1.749l-2 10.103h-12l-2-10.103 8-7.444 8 7.444zm-7 6.103c0-.552-.448-1-1-1s-1 .448-1 1 .448 1 1 1 1-.448 1-1zm1-5c0-1.105-.896-2-2-2s-2 .895-2 2 .896 2 2 2 2-.895 2-2z" />
+                </svg>
+                <!-- Galeria -->
+                <svg class="btn" id="galery__button" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+                    fill="#000000" height="24" width="24">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: #000000;
+                                }
+                            </style>
+                        </defs>
+                        <title></title>
+                        <g data-name="Layer 6" id="Layer_6">
+                            <path class="cls-1"
+                                d="M5,5V27H27V5ZM25,7V17.83l-3.5-3.25-5.71,6.33L12,18.83,7,23.65V7ZM8.49,25l3.86-3.71,3.86,2.13,5.41-6L25,20.56V25Z">
+                            </path>
+                            <rect class="cls-1" height="2" width="1.81" x="11.06" y="15"></rect>
+                        </g>
+                    </g>
+                </svg>
+                <!-- Boton -->
+                <label for="captureButton" onmousedown="sound.play()">
+                    <span id="bottom__nav__plus" class="btn camera-button" id="btn-detectar">
+                        <img src="public/IconSnapDark.png" alt="icono de camara">
 
-                <button id="captureButton" class="btn-capture">Capturar foto</button>
-                <button id="retomarButton" style="display:none;">Volver a la Cámara</button>
-                <button id="saveButton" style="display:none;">Guardar foto</button>
-                <!--<canvas id="canvas" style="display:none;"></canvas> -->
-                <div id="prediccion" style="display: none;">
-                    <div id="resultado">Predicción: Esperando...</div>
-                    <button id="btn-detectar" class="btn-detectar" disabled>Capturar información</button>
-                    <div id="info-ave"></div>
-                </div>
-        </section>
-    </main>
-
+                    </span>
+                </label>
+                <!-- Camara -->
+                <svg class="btn" id="camara__button" fill="#000000" height="24" width="24" version="1.1" id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 487 487"
+                    xml:space="preserve">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g>
+                            <g>
+                                <path
+                                    d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z M440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9 v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3z M97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45z M358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z">
+                                </path>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <!-- Login -->
+                <svg class="btn" id="user__button" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g clip-path="url(#clip0_15_82)">
+                            <rect width="24" height="24" fill="white"></rect>
+                            <g filter="url(#filter0_d_15_82)">
+                                <path
+                                    d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z"
+                                    fill="#000000"></path>
+                            </g>
+                        </g>
+                        <defs>
+                            <filter id="filter0_d_15_82" x="2.55444" y="3.5" width="18.8911" height="19"
+                                filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                <feColorMatrix in="SourceAlpha" type="matrix"
+                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha">
+                                </feColorMatrix>
+                                <feOffset dy="1"></feOffset>
+                                <feGaussianBlur stdDeviation="0.5"></feGaussianBlur>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0">
+                                </feColorMatrix>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_15_82">
+                                </feBlend>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_15_82" result="shape">
+                                </feBlend>
+                            </filter>
+                            <clipPath id="clip0_15_82">
+                                <rect width="24" height="24" fill="white"></rect>
+                            </clipPath>
+                        </defs>
+                    </g>
+                </svg>
+            </div>
+            <!-- fin barra navegacion-->
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="scripts/links.js"></script>
     <script type="module">
 
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
@@ -80,181 +176,7 @@
                 }
             });
         });
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const capturedImage = document.getElementById('capturedImage');
-        const captureButton = document.getElementById('captureButton');
-        const retomarButton = document.getElementById('retomarButton');
-        const saveButton = document.getElementById('saveButton');
-
-        let birdIdentified = false;
-
-        captureButton.addEventListener('click', () => {
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            capturedImage.src = canvas.toDataURL('image/png');
-            capturedImage.style.display = 'block';
-            video.style.display = 'none';
-            captureButton.style.display = 'none';
-            retomarButton.style.display = 'inline';
-
-            // Simulación de identificación de pájaro
-            birdIdentified = identifyBird(capturedImage.src);
-
-            if (birdIdentified) {
-                saveButton.style.display = 'inline';
-            } else {
-                alert("No se ha identificado ningún pájaro.");
-            }
-        });
-
-        retomarButton.addEventListener('click', () => {
-            capturedImage.style.display = 'none';
-            video.style.display = 'block';
-            captureButton.style.display = 'inline';
-            retomarButton.style.display = 'none';
-            saveButton.style.display = 'none';
-        });
-
-        saveButton.addEventListener('click', () => {
-            if (birdIdentified) {
-                const imageData = capturedImage.src;
-                let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-                savedImages.push(imageData);
-                localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                window.location.href = 'perfil.html';
-            } else {
-                alert("No se puede guardar la imagen porque no se ha identificado ningún pájaro.");
-            }
-        });
-
-        function identifyBird(imageSrc) {
-            const fileInput = document.getElementById('fileInput');
-            const preview = document.getElementById('preview');
-            const resultado = document.getElementById('resultado');
-            const infoAve = document.getElementById("info-ave");
-            const btnDetectar = document.getElementById('btn-detectar');
-
-            const listaAves = [
-                { "id": 0, "nombre": "Aguilucho" },
-                { "id": 1, "nombre": "Chincol" },
-                { "id": 2, "nombre": "Cometocino" },
-                { "id": 3, "nombre": "Cóndor" },
-                { "id": 4, "nombre": "Espatula" },
-                { "id": 5, "nombre": "Fiu" },
-                { "id": 6, "nombre": "Garza Cuca" },
-                { "id": 7, "nombre": "Gaviota Argéntea" },
-                { "id": 8, "nombre": "Huairavillo" },
-                { "id": 9, "nombre": "Jilguero Chileno" },
-                { "id": 10, "nombre": "Lechuza" },
-                { "id": 11, "nombre": "Loica" },
-                { "id": 12, "nombre": "Martin Pescador" },
-                { "id": 13, "nombre": "Ñandú" },
-                { "id": 14, "nombre": "Pájaro Huala" },
-                { "id": 15, "nombre": "Parina Grande" },
-                { "id": 16, "nombre": "Pato Real" },
-                { "id": 17, "nombre": "Pelicano" },
-                { "id": 18, "nombre": "Perdiz Chilena" },
-                { "id": 19, "nombre": "Peuco" },
-                { "id": 20, "nombre": "Picaflor" },
-                { "id": 21, "nombre": "Tiuque" },
-                { "id": 22, "nombre": "Tordo" },
-                { "id": 23, "nombre": "Tórtola" },
-                { "id": 24, "nombre": "Zarapito" }
-            ]
-
-            let modelo = null;
-            let lastPrediction = null;
-            let stablePredictionTime = 0;
-            const predictionThreshold = 3000; // 3 segundos
-            async function cargarModelo() {
-                console.log("Cargando modelo...");
-                modelo = await tf.loadGraphModel("model.json");
-                //modelo = await tf.loadLayersModel("model.json");
-                console.log("Modelo cargado...");
-            }
-
-            fileInput.addEventListener('change', (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const imageURL = URL.createObjectURL(file);
-                    preview.src = imageURL;
-                    preview.style.display = 'block';
-                    preview.alt = "Vista previa de la imagen seleccionada";
-                }
-            });
-
-            preview.addEventListener('load', async () => {
-                if (modelo) {
-                    const inputTensor = tf.tidy(() => {
-                        const image = tf.browser.fromPixels(preview);
-                        const processedImage = tf.image.resizeBilinear(image, [224, 224]);
-                        const input = tf.expandDims(processedImage.toFloat().div(255), 0);
-                        return input;
-                    })
-                    const prediction = await modelo.predict(inputTensor).data();
-                    //**//
-                    console.log("\n valors:", prediction);
-                    const valorPrediction = Math.max(...prediction);
-                    console.log("valorPrediction - valor maximo:", valorPrediction)
-                    const maxPredictionIndex = prediction.indexOf(Math.max(...prediction));
-                    console.log("maxPredictionIndex:", maxPredictionIndex);
-                    const prediccionActual = listaAves.find(listaAves => listaAves.id === maxPredictionIndex)?.nombre;
-                    if (valorPrediction < 0.60) {
-                        resultado.textContent = `No se detectó ninguna ave, intenta una vez mas.`;
-                    } else if (valorPrediction < 0.80) {
-                        resultado.textContent = `Posible deteccion: ${prediccionActual}. \n Intenta Enfocar mejor la imagen.`;
-                        lastPrediction = prediccionActual;
-                        tf.dispose(inputTensor);
-                    } else {
-                        resultado.textContent = `Predicción: ${prediccionActual}`;
-                        console.log("Predicción: ", prediccionActual);
-                        lastPrediction = prediccionActual;
-                        console.log("lastPrediction: ", lastPrediction);
-                        tf.dispose(inputTensor);
-                    }
-                    if (prediccionActual === lastPrediction) {
-                        stablePredictionTime += 500;
-                        if (stablePredictionTime >= predictionThreshold) {
-                            btnDetectar.classList.add("activo");
-                            btnDetectar.disabled = false;
-                        }
-                    } else {
-                        stablePredictionTime = 0;
-                        btnDetectar.classList.remove("activo");
-                        btnDetectar.disabled = true;
-                    }
-                    return true;
-                }
-
-            });
-            async function cargarDatosAve(ave) {
-                const response = await fetch("aves-datos.txt");
-                const data = await response.text();
-                const avesInfo = JSON.parse(data);
-                console.log("avesInfo:", avesInfo);
-                if (avesInfo[ave]) {
-                    const datos = avesInfo[ave];
-                    infoAve.innerHTML = `
-            <h3>${ave}</h3>
-            <p><strong>Descripción:</strong> ${datos.descripcion}</p>
-            <p><strong>Origen:</strong> ${datos.origen}</p>
-            <p><strong>Datos:</strong> ${datos.datos}</p>
-        `;
-                }
-            }
-
-            btnDetectar.addEventListener("click", () => {
-                if (lastPrediction) {
-                    cargarDatosAve(lastPrediction);
-                }
-            });
-            cargarModelo();
-
-            return true; // Simulación: siempre identifica un pájaro
-        }
     </script>
     <script src="scripts/camera.js"></script>
 </body>
-
 </html>

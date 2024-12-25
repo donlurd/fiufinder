@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - FiuFinder</title>
+    <link rel="icon" type="image/x-icon" href="public/logo.ico"> <!-- Favicon -->
+    <link rel="stylesheet" href="styles/styles.css"> <!-- Vinculamos el CSS global -->
+    <script type="module" src="scripts/firebaseConfig.js"></script> <!-- Firebase Config -->
+</head>
+
+<body>
+    <header>
+        <h1>Galería</h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="galeria.html">Galería</a>
+            <a href="camara.html">Cámara</a>
+            <span id="auth-button"><a href="login.html">Login</a></span> <!-- Botón dinámico -->
+        </nav>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>Toma/Sube una foto para identificar un ave</h2>
+            <div class="inputHolder">
+                <label class="cameraButton">
+                    <input type="file" accept="image/*;capture=camera" class="uploadInput" id="fileInput" />
+                    <img id="preview" alt="Aquí se mostrará la imagen que subas" class="preview-image" />
+                </label>
+            </div>
+            <div id="resultado" class="resultado"></div>
+            <button id="btn-detectar" class="btn-detectar">Capturar información</button>
+            <div id="info-ave" class="info-ave"></div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script type="module" src="scripts/login/other_login.js"></script>
+    <script src="scripts/galeria.js"></script>
+</body>
+</html>
