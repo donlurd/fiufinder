@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - FiuFinder</title>
     <!-- Firebase SDKs -->
+    <link rel="icon" type="image/x-icon" href="public/logo.ico"> <!-- Favicon -->
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
     <link rel="stylesheet" href="styles/styles.css">
@@ -42,21 +43,11 @@
         </section>
     </main>
     <script type="module">
-        import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyAWqdjhFLTxJ6PNikGwfNB7VCkFP4UGSeA",
-            authDomain: "fiufinder.firebaseapp.com",
-            projectId: "fiufinder",
-            storageBucket: "fiufinder.firebasestorage.app",
-            messagingSenderId: "983224653968",
-            appId: "1:983224653968:web:fbf386ba04d6c0fdd46015",
-            measurementId: "G-EXWK2ZH1L1"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        import { auth } from "./firebaseConfig.js";
+        
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
+        
+        
 
         const form = document.getElementById("registerForm");
         const emailInput = document.getElementById("email");
@@ -98,14 +89,8 @@
             }
 
             try {
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                // Enviar correo de verificación
-                await sendEmailVerification(user);
+                await createUserWithEmailAndPassword(auth, email, password);
                 alert("Cuenta creada con éxito. Por favor verifica tu correo.");
-
-                // Redirigir al inicio de sesión
                 window.location.href = "login.html";
             } catch (error) {
                 if (error.code === "auth/email-already-in-use") {
