@@ -4,7 +4,7 @@ Se trata de un identificador de aves con imágenes a color. Puede utilizarse en 
 
 ## Cómo utilizarlo
 ### Pagina Web
-Puede hacer uso de este proyecto ahora mismo ingresando a `https://www.fiufinder.lat`
+Puede hacer uso de este proyecto ahora mismo ingresando a https://www.fiufinder.lat
 Funciona tanto en Navegador de PC como en dispositivos mobiles.
 
 ### Descargar el repositorio
