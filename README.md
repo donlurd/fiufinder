@@ -3,6 +3,9 @@
 Se trata de un identificador de aves con imágenes a color. Puede utilizarse en el celular, solo apunta la cámara aves que quieres identificar (puede ser una imagen de la computadora, una foto, o uno de verdad), lo hace todo en el explorador utilizando Tensorflow.js, en base aun modelo entrenado en Python con Tensorflow
 
 ## Cómo utilizarlo
+### Pagina Web
+Puede hacer uso de este proyecto ahora mismo ingresando a `https://www.fiufinder.lat`
+Funciona tanto en Navegador de PC como en dispositivos mobiles.
 
 ### Descargar el repositorio
 Descarga el repositorio donde gustes en tu computadora
